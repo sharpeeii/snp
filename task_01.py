@@ -13,5 +13,3 @@ def is_palindrome(string: str):
         right -= 1
     return True
 
-while True:
-    print(is_palindrome(input()))
