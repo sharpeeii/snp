@@ -8,3 +8,4 @@ def coincidence(lst = None, rng = None):
         if isinstance(item, (int,float)) and bottom <= item <= top:
             appendix.append(item)
     return appendix
+
