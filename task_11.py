@@ -1,7 +1,7 @@
 class Dessert:
 
     @staticmethod
-    def _warn(invalid, reset = True):
+    def warn(invalid, reset = True):
         if reset:
             print(f"invalid input '{invalid}', value set to default")
         else:
@@ -12,13 +12,13 @@ class Dessert:
             self._name = name
         else:
             self._name = "not stated"
-            Dessert._warn(name)
+            Dessert.warn(name)
 
         if isinstance(calories, (int,float)) and calories >= 0:
             self._calories = calories
         else:
             self._calories = 0
-            Dessert._warn(calories)
+            Dessert.warn(calories)
 
     @property
     def name(self):
@@ -29,7 +29,7 @@ class Dessert:
         if isinstance(new_value,str) and new_value:
             self._name = new_value
         else:
-            Dessert._warn(new_value, reset=False)
+            Dessert.warn(new_value, reset=False)
 
     @property
     def calories(self):
@@ -40,7 +40,7 @@ class Dessert:
         if isinstance(new_value, (int,float)) and new_value >= 0:
             self._calories = new_value
         else:
-            Dessert._warn(new_value, reset=False)
+            Dessert.warn(new_value, reset=False)
 
     def is_healthy(self):
         return self._calories < 200
