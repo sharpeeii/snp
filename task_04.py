@@ -14,9 +14,3 @@ def sort_list(lst: list):
     lst.append(minimal)
     return lst 
 
-print(sort_list([]))
-print(sort_list([2,4,6,8]))
-print(sort_list([1]))
-print(sort_list([1,2,1,3]))
-print(sort_list(chaotic_array))
-
