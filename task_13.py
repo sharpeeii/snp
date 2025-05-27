@@ -1,5 +1,4 @@
 from datetime import datetime
-import time
 
 def cached(max_size = None, seconds = None):
     if not isinstance(max_size, int):
@@ -9,6 +8,7 @@ def cached(max_size = None, seconds = None):
     def decorator(func):
         cache = {}
         def wrapper(*args, **kwargs):              #структура кэша - {tuple:{value:date}}
+
             try:
                 current_key = (args, tuple(sorted(kwargs.items()))) 
             except Exception:                    #делаем ключ только при условии, что тип хэшируется
@@ -18,18 +18,18 @@ def cached(max_size = None, seconds = None):
                     return None     #если сама функция ляжет
 
             expired_keys = []
-            if seconds is not None:
+            if seconds is not None:  #удаляем просрочку, только если указано ttl
                 for key in cache:
                     time_spent = datetime.now() - cache[key]['date'] 
-                    if time_spent.total_seconds() > seconds:  #удаляем просрочку
+                    if time_spent.total_seconds() > seconds:  
                         expired_keys.append(key)
-            for key in expired_keys:
-                del cache[key]
+                for key in expired_keys:
+                    del cache[key]
 
             if current_key in cache:
                 result = cache[current_key]['value']
             else:
-                if max_size is not None and len(cache) == max_size:
+                if max_size is not None and len(cache) == max_size: #при переполнении удаляем самый старый
                     first = next(iter(cache))
                     del cache[first]
                 try:
