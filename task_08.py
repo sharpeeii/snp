@@ -1,11 +1,13 @@
 def str_multiply(string: str):
     ans = 1
+    flag = False
     for ch in string:
         if ch == "0":
             return 0
         if ch.isdigit():
             ans = ans * int(ch)
-    return ans
+            flag = True
+    return ans if flag else None
 
 def multiply_numbers(inputs = None):
     if inputs is None:
