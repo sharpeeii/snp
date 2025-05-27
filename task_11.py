@@ -37,13 +37,15 @@ class Dessert:
 
     @calories.setter
     def calories(self, new_value):
-        if isinstance(new_value, (int,float)) and new_value >= 0:
+        if isinstance(new_value, (int,float, str)):
             self._calories = new_value
         else:
             Dessert.warn(new_value, reset=False)
 
     def is_healthy(self):
-        return self._calories < 200
+        
+        if isinstance(self._calories, (int,float)):
+            return self._calories < 200
 
     def is_delicious(self):
         return True
