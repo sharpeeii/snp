@@ -4,12 +4,5 @@ def format_string(string:str):
 
 def is_palindrome(string: str):
     formatted = format_string(string)
-    left = 0
-    right = len(formatted)-1
-    while left < right:
-        if formatted[left]  != formatted[right]:
-            return False
-        left += 1
-        right -= 1
-    return True
+    return formatted == formatted[::-1]
 
