@@ -3,11 +3,14 @@ class BlockTranspositionCipher:
         self.decrypt = decrypt
         if isinstance(text, str):
             self.text = text
-        if isinstance(key, str) and key.isalpha() and key.isascii():
-            if len(set(key)) == len(key):
+        else:
+            raise ValueError("string only!")
+        if not isinstance(key, str) or not (key.isalpha() and key.isascii()):
+            raise ValueError("latin alphabet only!")
+        if len(set(key.lower())) == len(key.lower()):
                self.key = key.lower()
         else:
-            raise TypeError
+            raise ValueError("unique chars only!")
         self.processed_blocks = self.cipher()
         self.counter = 0
         
@@ -35,6 +38,7 @@ class BlockTranspositionCipher:
             for block in old_blocks:
                 new_block = "".join(block[j] for j in order)
                 new_blocks.append(new_block)
+            new_blocks[-1] = new_blocks[-1].rstrip()
         else:
             for block in old_blocks:
                 char_list = [""]*len(order)
@@ -54,9 +58,3 @@ class BlockTranspositionCipher:
         self.counter += 1
         return block
 
-            
-
-cipha = BlockTranspositionCipher("elhowlrlo  d", "cab", True)
-word = "".join(i for i in cipha).strip()
-cipha2 = BlockTranspositionCipher('helloworld', 'cab')
-word2 = "".join(i for i in cipha2)
