@@ -36,15 +36,15 @@ class BlockTranspositionCipher:
         new_blocks = []
         if self.decrypt:
             for block in old_blocks:
-                new_block = "".join(block[j] for j in order)
-                new_blocks.append(new_block)
-            new_blocks[-1] = new_blocks[-1].rstrip()
-        else:
-            for block in old_blocks:
                 char_list = [""]*len(order)
                 for j in range(len(order)):
                     char_list[order[j]] = block[j]
                 new_block = "".join(char_list)
+                new_blocks.append(new_block)
+            new_blocks[-1] = new_blocks[-1].rstrip()
+        else:
+            for block in old_blocks:
+                new_block = "".join(block[i] for i in order)
                 new_blocks.append(new_block)
         return new_blocks
 
